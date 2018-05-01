@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Copies data to clipboard from stdin.
+
+CLIPBOARD_FILE=/tmp/clipboard-data.txt
+
+xclip=@XCLIP_BIN@
+
+if ! [ -n "$DISPLAY" ]; then
+    cat > "$CLIPBOARD_FILE"
+elif [ -x "$(command -v xclip)" ]; then
+    cat | $xclip -in -selection clipboard
+fi

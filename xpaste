@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Paste clipboard to STDOUT.
+
+CLIPBOARD_FILE=/tmp/clipboard-data.txt
+
+xclip=@XCLIP_BIN@
+
+if ! [ -n "$DISPLAY" ] && [ -e $CLIPBOARD_FILE ]; then
+    cat $CLIPBOARD_FILE
+elif [ -x "$(command -v xclip)" ]; then
+    xclip -out -selection clipboard
+fi
